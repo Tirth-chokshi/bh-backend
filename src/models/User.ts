@@ -1,14 +1,14 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose'
 
 export interface IUser extends Document {
-  googleId: string;
-  email: string;
-  displayName: string;
-  firstName?: string;
-  lastName?: string;
-  profilePhoto?: string;
-  createdAt: Date;
-  lastLogin: Date;
+  googleId: string
+  email: string
+  displayName: string
+  firstName?: string
+  lastName?: string
+  profilePhoto?: string
+  createdAt: Date
+  lastLogin: Date
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -39,4 +39,4 @@ const userSchema = new mongoose.Schema<IUser>({
   },
 });
 
-export const User = mongoose.model<IUser>('User', userSchema);
+export const User = mongoose.model<IUser>('User', userSchema)

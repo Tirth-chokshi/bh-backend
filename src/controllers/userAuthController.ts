@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import { User, IUser } from "../models/User";
+import { Request, Response } from "express"
+import { User, IUser } from "../models/User"
 
 export const getCurrentUser = async (req: Request, res: Response) => {
   try {
-    const user = req.user as IUser;
+    const user = req.user as IUser
     res.json({
       success: true,
       data: {
@@ -30,10 +30,10 @@ export const googleCallback = async (req: Request, res: Response) => {
       );
     }
     // Redirect to dashboard on success
-    res.redirect("http://localhost:3000/dashboard");
+    res.redirect("http://localhost:3000/dashboard")
   } catch (error) {
-    console.error("Google callback error:", error);
-    res.redirect("http://localhost:3000/auth?error=server_error");
+    console.error("Google callback error:", error)
+    res.redirect("http://localhost:3000/auth?error=server_error")
   }
 };
 
@@ -64,7 +64,7 @@ export const logout = async (req: Request, res: Response) => {
 export const getProfile = async (req: Request, res: Response) => {
   try {
     const user = req.user as IUser;
-    const userProfile = await User.findById(user._id).select("-googleId -__v");
+    const userProfile = await User.findById(user._id).select("-googleId -__v")
 
     if (!userProfile) {
       return res.status(404).json({
@@ -88,8 +88,8 @@ export const getProfile = async (req: Request, res: Response) => {
 // Update user profile
 export const updateProfile = async (req: Request, res: Response) => {
   try {
-    const user = req.user as IUser;
-    const { displayName, firstName, lastName } = req.body;
+    const user = req.user as IUser
+    const { displayName, firstName, lastName } = req.body
 
     const updatedUser = await User.findByIdAndUpdate(
       user._id,
@@ -109,6 +109,6 @@ export const updateProfile = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Error updating user profile",
-    });
+    })
   }
-};
+}

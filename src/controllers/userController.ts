@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
-import { User, IUser } from "../models/User";
+import { Request, Response } from "express"
+import { User, IUser } from "../models/User"
 
 // Get all users (admin only)
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find()
       .select("-googleId -__v")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
 
     res.json({
       success: true,
@@ -23,7 +23,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 // Get user by ID
 export const getUserById = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.params.id).select("-googleId -__v");
+    const user = await User.findById(req.params.id).select("-googleId -__v")
 
     if (!user) {
       return res.status(404).json({
@@ -46,7 +46,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findByIdAndDelete(req.params.id)
 
     if (!user) {
       return res.status(404).json({
