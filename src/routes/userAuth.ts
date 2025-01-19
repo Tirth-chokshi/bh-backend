@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { AuthController } from '../controllers/userAuthController';
+import { getCurrentUser, logout, getProfile, updateProfile, googleCallback } from '../controllers/userAuthController';
 import { isAuthenticated } from '../middleware/auth';
 
 export const authRouter = Router();
@@ -14,11 +14,11 @@ authRouter.get(
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-  AuthController.googleCallback
+  googleCallback
 );
 
 // Auth routes
-authRouter.get('/current-user', isAuthenticated, AuthController.getCurrentUser);
-authRouter.post('/logout', isAuthenticated, AuthController.logout);
-authRouter.get('/profile', isAuthenticated, AuthController.getProfile);
-authRouter.put('/profile', isAuthenticated, AuthController.updateProfile);
+authRouter.get('/current-user', isAuthenticated, getCurrentUser);
+authRouter.post('/logout', isAuthenticated, logout);
+authRouter.get('/profile', isAuthenticated, getProfile);
+authRouter.put('/profile', isAuthenticated, updateProfile);
